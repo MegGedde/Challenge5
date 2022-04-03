@@ -40,9 +40,9 @@ $(".saveBtn").on("click", function () {
 
     //set items in local storage.
     localStorage.setItem(time,text);
-    console.log(time, text);
 })
-//load any saved data from LocalStorage
+
+// //load any saved data from LocalStorage
 $("#8 .textarea").val(localStorage.getItem("8"));
 $("#9 .textarea").val(localStorage.getItem("9"));
 $("#010 .textarea").val(localStorage.getItem("010"));
@@ -53,3 +53,4 @@ $("#014 .textarea").val(localStorage.getItem("014"));
 $("#015 .textarea").val(localStorage.getItem("015"));
 $("#016 .textarea").val(localStorage.getItem("016"));
 $("#017 .textarea").val(localStorage.getItem("017"));
+
