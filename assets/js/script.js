@@ -1,27 +1,4 @@
-tasks = [];
-
 $("#currentDay").text(moment().format('dddd, MMMM Do'));
-
-//load from local storage
-var loadTasks = function() {
-    tasks = JSON.parse(localStorage.getItem("tasks"))
-    if(!tasks) {
-        tasks={};
-    };
-    printTasks(tasks)
-}
-
-var printTasks = function(){
-    $.each(tasks, function(list, arr){
-
-        var taskP = $("<p>").addClass("description task-item-" + list).text(arr)
-        
-        // console.log(list)
-        // console.log(taskP);
-
-        $("#task-item-" + list).replaceWith(taskP);
-    })
-}
 
 
 //Change textarea background color based on time
@@ -55,41 +32,24 @@ setInterval(checkTime(), (1000 * 60) * 15);
 
 checkTime()
 
+//save written tasks
+$(".saveBtn").on("click", function () {
+    //get nearby values.
+    var text = $(this).siblings(".textarea").val();
+    var time = $(this).parent().attr("id");
 
-//Task update with click
-$(".textarea").on("blur", "textarea", function(){
-    var text =$(this)
-      .text()
-      .trim();
-    var textInput =$("<textarea>")
-      .val(text);
-  
-    $(this).replaceWith(textInput);
-     textInput.trigger("focus");
-  });
-
-//   //Task needs to be updated
-//   $(".textarea").on("blur", "textarea", function() {
-//     //get the textareas; current value/text
-//       var text = $(this)
-//         .val()
-//         .trim();
-//       // console.log(text)
-  
-//       //recreate p element
-//       var taskP = $("<p>")
-//         .addClass("taskItem")
-//         .text(text);
-  
-//       // replace textarea with p element
-//       $(this).replaceWith(taskP);
-//     }); 
-
-// save to local storage
-$('.saveBtn').on('click', function() {
-    var index = $("saveBtn").index(this);
-    tasks[index] = $(this).parent().find(".tastInput").text();
-    window.localStorage.setItem("tasks", JSON.stringify(tasks));
-    console.log(tasks)
+    //set items in local storage.
+    localStorage.setItem(time,text);
+    console.log(time, text);
 })
-
+//load any saved data from LocalStorage
+$("#8 .textarea").val(localStorage.getItem("8"));
+$("#9 .textarea").val(localStorage.getItem("9"));
+$("#010 .textarea").val(localStorage.getItem("010"));
+$("#011 .textarea").val(localStorage.getItem("011"));
+$("#012 .textarea").val(localStorage.getItem("012"));
+$("#013 .textarea").val(localStorage.getItem("013"));
+$("#014 .textarea").val(localStorage.getItem("014"));
+$("#015 .textarea").val(localStorage.getItem("015"));
+$("#016 .textarea").val(localStorage.getItem("016"));
+$("#017 .textarea").val(localStorage.getItem("017"));
