@@ -1,4 +1,28 @@
+tasks = [];
+
 $("#currentDay").text(moment().format('dddd, MMMM Do'));
+
+//load from local storage
+var loadTasks = function() {
+    tasks = JSON.parse(localStorage.getItem("tasks"))
+    if(!tasks) {
+        tasks={};
+    };
+    printTasks(tasks)
+}
+
+var printTasks = function(){
+    $.each(tasks, function(list, arr){
+
+        var taskP = $("<p>").addClass("description task-item-" + list).text(arr)
+        
+        // console.log(list)
+        // console.log(taskP);
+
+        $("#task-item-" + list).replaceWith(taskP);
+    })
+}
+
 
 //Change textarea background color based on time
 var checkTime = function () {
@@ -31,41 +55,41 @@ setInterval(checkTime(), (1000 * 60) * 15);
 
 checkTime()
 
-// $(".m-1").on("click", "p", function() {
-//     var text = $(this)
-//         .text()
+
+//Task update with click
+$(".textarea").on("blur", "textarea", function(){
+    var text =$(this)
+      .text()
+      .trim();
+    var textInput =$("<textarea>")
+      .val(text);
+  
+    $(this).replaceWith(textInput);
+     textInput.trigger("focus");
+  });
+
+//   //Task needs to be updated
+//   $(".textarea").on("blur", "textarea", function() {
+//     //get the textareas; current value/text
+//       var text = $(this)
+//         .val()
 //         .trim();
-//     var textInput = $("<textarea>")
-//         .addClass("m-1")
-//         .val(text);
-//     $(this).replaceWith(textInput);
-//     textInput.trigger("focus")
-//     console.log(text);
-// })
-
-// var saveTasks = function() {
-//     localStorage.setItem("tasks", JSON.stringify(tasks));
-//   };
-
-//   var loadTasks = function() {
-//     tasks = JSON.parse(localStorage.getItem("tasks"));
+//       // console.log(text)
   
-//     // if nothing in localStorage, create a new object to track all task status arrays
-//     if (!tasks) {
-//       tasks = {
-//         toDo: [],
-//         inProgress: [],
-//         inReview: [],
-//         done: []
-//       };
-//     }
-
-// var times = {};
-
-// var timeStart = 8am
-// timeStart++
-
-// for (var i = 8; i < 6; i++) {
+//       //recreate p element
+//       var taskP = $("<p>")
+//         .addClass("taskItem")
+//         .text(text);
   
-//     }
-// }
+//       // replace textarea with p element
+//       $(this).replaceWith(taskP);
+//     }); 
+
+// save to local storage
+$('.saveBtn').on('click', function() {
+    var index = $("saveBtn").index(this);
+    tasks[index] = $(this).parent().find(".tastInput").text();
+    window.localStorage.setItem("tasks", JSON.stringify(tasks));
+    console.log(tasks)
+})
+
