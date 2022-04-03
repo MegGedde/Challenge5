@@ -70,6 +70,7 @@ textarea{
   transition: all .3s ease-in-out;
 }
 
-ul {
-  list-style-type: none;
+.row {
+  margin-bottom: 1px;
 }
+
